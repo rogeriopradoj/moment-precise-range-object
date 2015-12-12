@@ -1,27 +1,19 @@
 (function(moment) {
-    var STRINGS = {
-        nodiff: '',
-        year: 'year',
-        years: 'years',
-        month: 'month',
-        months: 'months',
-        day: 'day',
-        days: 'days',
-        hour: 'hour',
-        hours: 'hours',
-        minute: 'minute',
-        minutes: 'minutes',
-        second: 'second',
-        seconds: 'seconds',
-        delimiter: ' '
+    var DIFFERENCE = {
+        years: 0,
+        months: 0,
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
     };
-    moment.fn.preciseDiff = function(d2) {
+    moment.fn.preciseDiffObject = function(d2) {
         return moment.preciseDiff(this, d2);
     };
-    moment.preciseDiff = function(d1, d2) {
+    moment.preciseDiffObject = function(d1, d2) {
         var m1 = moment(d1), m2 = moment(d2);
         if (m1.isSame(m2)) {
-            return STRINGS.nodiff;
+            return DIFFERENCE;
         }
         if (m1.isAfter(m2)) {
             var tmp = m1;
@@ -62,30 +54,13 @@
             yDiff--;
         }
 
-        function pluralize(num, word) {
-            return num + ' ' + STRINGS[word + (num === 1 ? '' : 's')];
-        }
-        var result = [];
-
-        if (yDiff) {
-            result.push(pluralize(yDiff, 'year'));
-        }
-        if (mDiff) {
-            result.push(pluralize(mDiff, 'month'));
-        }
-        if (dDiff) {
-            result.push(pluralize(dDiff, 'day'));
-        }
-        if (hourDiff) {
-            result.push(pluralize(hourDiff, 'hour'));
-        }
-        if (minDiff) {
-            result.push(pluralize(minDiff, 'minute'));
-        }
-        if (secDiff) {
-            result.push(pluralize(secDiff, 'second'));
-        }
-
-        return result.join(STRINGS.delimiter);
+        return {
+            years: yDiff,
+            months: mDiff,
+            days: dDiff,
+            hours: hourDiff,
+            minutes: minDiff,
+            seconds: secDiff
+        };
     };
 }(moment));
