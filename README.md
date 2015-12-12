@@ -1,4 +1,7 @@
-# moment-precise-range
+# moment-precise-range-object
+
+Fork of https://github.com/codebox/moment-precise-range
+
 <p>
 This is a plugin for the <a href="http://momentjs.com/">moment.js</a> JavaScript library, to display date/time ranges precisely, in a human-readable format.
 </p>
